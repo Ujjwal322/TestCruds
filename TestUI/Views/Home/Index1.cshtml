@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewData["Title"] = "Index1";
+}
+
+<h1>Index1</h1>
+
+<div>
+    <p id="ddlcustomername">
+        <br>
+</div>
+
+
+<table id="table1" class="table table table-striped">
+
+    <thead>
+        <tr>
+            <th>Month</th>
+            <th>CustomerName</th>
+            <th>No Of Invoice</th>
+            <th>Selse</th>
+            <th>Payment Collaction</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    </tbody>
+
+</table>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        debugger;
+        $.noConflict();
+        $('#table1').DataTable({
+            "ajax": {
+                "url": "/Home/Index",
+                "type": "GET",
+                "datatype": "json"
+            },
+
+            columnDefs: [
+                { type: 'stringMonthYear', targets: 0 }
+            ],
+
+            "columns": [{
+                "data": "dateOfMonth",
+                "autoWidth": true,
+                render: function (data) {
+                    var monthsarry = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                    var date = new Date(data);
+
+                    var month = monthsarry[date.getMonth()];
+                    var Data1 = (month.toString()) + "-" + date.getFullYear().toString().substr(-2);
+                    return Data1;
+                }
+            },
+            {
+                "data": "customerName",
+                "autoWidth": true,
+            },
+
+            {
+                "data": "noOfInvoices",
+                "autoWidth": true,
+            },
+
+            {
+                "data": "sales",
+                "autoWidth": true,
+            },
+
+            {
+                "data": "paymentCollection",
+                "autoWidth": true,
+            }
+
+
+            ],
+
+            initComplete: function () {
+                this.api().columns([1]).every(function () {
+
+                    var column = this;
+                    var select = $('<select > <option value="">Select Customername</option> </select> ')
+                        .appendTo('#ddlcustomername')
+                        .on('change', function () {
+                            var val = $(this).val();
+                            column.search(this.value).draw();
+                        });
+                    console.log(column.data().unique());
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            },
+        });
+    });
+
+
+    jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+        "stringMonthYear-pre": function (s) {
+            var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            var dateComponents = s.split("-");
+            dateComponents[0] = dateComponents[0].replace(",", "");
+            dateComponents[1] = jQuery.trim(dateComponents[1]);
+
+            var year = dateComponents[1];
+
+            var month = 0;
+            for (var i = 0; i < months.length; i++) {
+                if (months[i].toLowerCase() == dateComponents[0].toLowerCase().substring(0, 3)) {
+                    month = i;
+                    break;
+                }
+            }
+
+            return new Date(year, month, 1);
+        },
+
+
+        "stringMonthYear-asc": function (a, b) {
+            return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+        },
+
+        "stringMonthYear-desc": function (a, b) {
+            return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+        }
+    });
+
+</script>

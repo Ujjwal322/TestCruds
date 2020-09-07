@@ -1,0 +1,83 @@
+﻿@model IEnumerable<TestUI.Models.Invoice>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(model => model.DateOfMonthInvoice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfMonthPay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfMonth)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoOfInvoices)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Month)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sales)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentCollection)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.DateOfMonthInvoice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfMonthPay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfMonth)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoOfInvoices)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Month)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sales)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentCollection)
+            </td>
+            @*<td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>*@
+        </tr>
+}
+    </tbody>
+</table>

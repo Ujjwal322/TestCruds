@@ -1,0 +1,53 @@
+<h1>Customer Data </h1>
+
+<!--<p>This component demonstrates fetching Customer data from the server.</p>
+
+<p *ngIf="!empList"><em>Loading...</em></p>-->
+
+<p>
+  <a [routerLink]="['/register-employee']">Create New</a>
+</p>
+
+
+
+<!--<div class="col-sm-12">
+  <button (click)="ExportTOExcel()" class="btn btn-success">ExportTOExcel</button>
+</div>
+
+<br />-->
+
+
+<div class="col-lg-12 table-responsive" #TABLE #table>
+
+  <div style="padding-bottom: 10px;padding-top: 10px;">
+    <div class="row">
+      <div class="col-sm-12">
+        <button (click)="ExportTOExcel()" class="btn btn-success">ExportTOExcel</button>
+      </div>
+    </div>
+  </div>
+
+  <table class='table' *ngIf="custList">
+    <thead>
+      <tr>
+        <th>Customer ID</th>
+        <th>Customer No</th>
+        <th>Customer Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cust of custList">
+        <td>{{ cust.customerId }}</td>
+        <td>{{ cust.customerNo }}</td>
+        <td>{{ cust.customerName }}</td>
+        <td>
+        <td>
+          <!--<a [routerLink]="['/customer/edit/', cust.customerId]">Edit</a> |
+          <a [routerLink]="" (click)="delete(cust.customerId)">Delete</a>-->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  </div>
+

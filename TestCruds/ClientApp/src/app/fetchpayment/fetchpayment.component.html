@@ -1,0 +1,50 @@
+<h1>Payment Data </h1>
+
+<!--<p>This component demonstrates fetching Customer data from the server.</p>
+
+<p *ngIf="!empList"><em>Loading...</em></p>-->
+
+<p>
+  <a [routerLink]="['/register-invoice']">Create New</a>
+</p>
+
+
+<div class="col-lg-12 table-responsive" #TABLE #table>
+
+  <div style="padding-bottom: 10px;padding-top: 10px;">
+    <div class="row">
+      <div class="col-sm-12">
+        <button (click)="ExportTOExcel()" class="btn btn-success">ExportTOExcel</button>
+      </div>
+    </div>
+  </div>
+
+
+  <table class='table' *ngIf="payList">
+    <thead>
+      <tr>
+        <th>Payment ID</th>
+        <th>Payment No</th>
+        <th>Invoice No</th>
+        <th>Payment Date</th>
+        <th>Payment Amount</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pay of payList">
+        <td>{{ pay.paymentId }}</td>
+        <td>{{ pay.paymentNo }}</td>
+        <td>{{pay.invoiceId }}</td>
+        <td>{{pay.paymentDate}}</td>
+        <td>{{pay.paymentAmount}}</td>
+        <!--<td>{{inv.paymentDueDate}}</td>-->
+        <td>
+          <!--<td>
+            <a [routerLink]="['/invoice/edit/', inv.invoiceId]">Edit</a> |
+            <a [routerLink]="" (click)="delete(inv.invoiceId)">Delete</a>
+          </td>-->
+      </tr>
+    </tbody>
+  </table>
+</div>
