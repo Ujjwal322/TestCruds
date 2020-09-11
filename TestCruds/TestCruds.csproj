@@ -36,6 +36,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\addinvoice\addinvoice.component.ts" />
+    <None Remove="ClientApp\src\app\addpayment\addpayment.component.ts" />
     <None Remove="ClientApp\src\app\fetch-report\fetch-report.component.ts" />
     <None Remove="ClientApp\src\app\fetchcustomer\fetchcustomer.component.ts" />
     <None Remove="ClientApp\src\app\fetchdetalis\fetchdetails.component.ts" />
@@ -47,6 +49,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\addinvoice\addinvoice.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\addpayment\addpayment.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\fetch-report\fetch-report.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\fetchcustomer\fetchcustomer.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\fetchdetalis\fetchdetails.component.ts" />

@@ -69,7 +69,7 @@ export class FetchReportComponent implements OnInit {
         initComplete: function () {
           this.api().columns([1]).every(function () {
             var column = this;
-            var select = $('<select><option value="">All</option></select>')
+            var select = $('<select><option value="">Select Customername</option></select>')
               .appendTo('#ddlcustomername')
               .on('change', function () {
                 var val = $(this).val();

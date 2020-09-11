@@ -17,7 +17,7 @@
 <br />-->
 
 
-<div class="col-lg-12 table-responsive" #TABLE #table>
+<!--<div class="col-lg-12 table-responsive" #TABLE #table>
 
   <div style="padding-bottom: 10px;padding-top: 10px;">
     <div class="row">
@@ -33,6 +33,7 @@
         <th>Customer ID</th>
         <th>Customer No</th>
         <th>Customer Name</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -41,13 +42,45 @@
         <td>{{ cust.customerNo }}</td>
         <td>{{ cust.customerName }}</td>
         <td>
-        <td>
-          <!--<a [routerLink]="['/customer/edit/', cust.customerId]">Edit</a> |
-          <a [routerLink]="" (click)="delete(cust.customerId)">Delete</a>-->
+          <a [routerLink]="['/customer/edit/', cust.customerId]">Edit</a> |
+          <a [routerLink]="" (click)="delete(cust.customerId)">Delete</a>
         </td>
       </tr>
     </tbody>
   </table>
 
+  </div>-->
+
+<div class="col-lg-12 table-responsive" #TABLE #table>
+  <div style="padding-bottom: 10px;padding-top: 10px;">
+    <div class="row">
+      <div class="col-sm-12">
+        <button (click)="ExportTOExcel()" class="btn btn-success">ExportTOExcel</button>
+      </div>
+    </div>
   </div>
+
+  <p-table #dt class="dataTable" [value]="custList" [rows]="5" [paginator]="custList?.length > 5" [globalFilterFields]="['customerName']">
+    <ng-template pTemplate="header">
+      <tr>
+        <th [pSortableColumn]="'customerId'">Customer ID<p-sortIcon [field]="'customerId'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon></th>
+        <th [pSortableColumn]="'customerNo'">CustomerNumber<p-sortIcon [field]="'customerNo '" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon></th>
+        <th [pSortableColumn]="'customerName'">CustomerName<p-sortIcon [field]="'customerName '" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon></th>
+        <th [pSortableColumn]="''">Actions<p-sortIcon [field]="''" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-custList>
+      <tr>
+        <td>{{ custList.customerId}}</td>
+        <td>{{ custList.customerNo }}</td>
+        <td>{{ custList.customerName }}</td>
+        <td>
+          <a [routerLink]="['/customer/edit/', custList.customerId]">Edit</a> |
+          <a [routerLink]="" (click)="delete(custList.customerId)">Delete</a>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</div>
 

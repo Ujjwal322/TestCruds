@@ -46,6 +46,14 @@ export class FetchPaymentComponent {
     );
   }
 
+  delete(paymentId) {
+    var ans = confirm("Do you want to delete customer with   paymentId: " + paymentId);
+    if (ans) {
+      this.paymentservice.deletePayment(paymentId).subscribe(() => {
+        this.getPaymet();
+      }, error => console.error(error))
+    }
+  }
 
 }
 
@@ -53,6 +61,6 @@ interface PaymentData {
   paymentId: number;
   paymentNo: string;
   invoiceId: number;
-  paymentDate: string;
+  paymentDate: Date;
   paymentAmount: string;
 }

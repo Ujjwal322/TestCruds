@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Cors;
 namespace TestCruds.Controllers
 {
     //[Route("api/[controller]")]
-    [EnableCors("AllowMyOrigin")]
+    //[EnableCors("AllowMyOrigin")]
     public class CustomerController : Controller
     {
         public bool IsTenantExist { get; set; }
@@ -35,6 +35,15 @@ namespace TestCruds.Controllers
         public IEnumerable<CustomerTbl> Index()
         {
             return cust.GetAllCustomer();
+        }
+
+
+        [HttpGet]
+        [Route("api/Customer/GetCustomerList")]
+
+        public IEnumerable<CustomerTbl> GetCustomerList()
+        {
+            return cust.GetCustomers();
         }
 
         [HttpPost]

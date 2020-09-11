@@ -16,6 +16,12 @@ export class InvoiceService {
     this.myAppUrl = baseUrl;
   }
 
+  getCustomerList() {
+    return this.http.get(this.myAppUrl + 'api/Customer/GetCustomerList')
+      .map(res => res.json())
+      .catch(this.errorHandler);
+  }
+
   getInvoiceList() {
     return this.http.get(this.myAppUrl + 'api/Invoice/GetInvoice')
       .map(res => res.json())

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -7,7 +7,7 @@
 <body>
 
   <h1>{{title}}</h1>
-  <h3>Customer</h3>
+  <!--<h3>Customer</h3>-->
   <hr />
   <form [formGroup]="customerForm" (ngSubmit)="save()" #formDir="ngForm" novalidate>
     <div class="form-group row">
@@ -34,8 +34,9 @@
     </div>
     
     <div class="form-group">
-      <button type="submit" class="btn btn-default">Save</button>
-      <button class="btn" (click)="cancel()">Cancel</button>
+      <button type="submit" class="btn btn-light">Save</button>
+      &nbsp;
+      <button class="btn btn-light" (click)="cancel()">Cancel</button>
     </div>
   </form>
 

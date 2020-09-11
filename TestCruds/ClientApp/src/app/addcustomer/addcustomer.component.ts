@@ -11,7 +11,7 @@ import { CustomerService } from '../services/customerservice';
 
 export class createcustomer implements OnInit {
   customerForm: FormGroup;
-  title: string = "Create";
+  title: string = "Create Customer";
   customerId: number;
   errorMessage: any;
 
@@ -33,7 +33,7 @@ export class createcustomer implements OnInit {
 
   ngOnInit() {
     if (this.customerId > 0) {
-      this.title = "Edit";
+      this.title = "Edit Customer";
       this.customerservice.getCustomerById(this.customerId)
         .subscribe(resp => this.customerForm.setValue(resp)
           , error => this.errorMessage = error);
@@ -44,13 +44,13 @@ export class createcustomer implements OnInit {
     if (!this.customerForm.valid) {
       return;
     }
-    if (this.title == "Create") {
+    if (this.title == "Create Customer") {
       this.customerservice.saveCustomer(this.customerForm.value)
         .subscribe((data) => {
           this.router.navigate(['/fetch-customer']);
         }, error => this.errorMessage = error)
     }
-    else if (this.title == "Edit") {
+    else if (this.title == "Edit Customer") {
       this.customerservice.updateCustomer(this.customerForm.value)
         .subscribe((data) => {
           this.router.navigate(['/fetch-customer']);

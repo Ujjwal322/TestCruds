@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+</head>
+<body>
+
+  <h1>{{title}}</h1>
+  <!--<h3>Customer</h3>-->
+  <hr />
+  <form [formGroup]="paymentForm" (ngSubmit)="save()" #formDir="ngForm" novalidate>
+    <div class="form-group row">
+      <input type="hidden" name="paymentId" value="paymentId" formControlName="paymentId" />
+    </div>
+    <div class="form-group row">
+      <label class=" control-label col-md-12">Payment No</label>
+      <div class="col-md-4">
+        <input class="form-control" type="text" formControlName="paymentNo">
+      </div>
+      <!--<span class="text-danger" *ngIf="customerNo.invalid && formDir.submitted">
+      CustomerNo is required.
+    </span>-->
+    </div>
+
+    <!--<div class="form-group row">
+    <label class="control-label col-md-12" for="Department">Invoice No</label>
+    <div class="col-md-4">
+      <input class="form-control" type="text" formControlName="invoiceId">
+    </div>
+    <span class="text-danger" *ngIf="customerName.invalid && formDir.submitted">
+      CustomerName is required
+    </span>
+  </div>-->
+
+    <div class="form-group row">
+      <label class="control-label col-md-12" for="Invoice No">Invoice No</label>
+      <div class="col-md-4">
+        <select class="form-control" formControlName="invoiceId">
+          <option value="">Select Invoiceno</option>
+          <option *ngFor="let invoice of  invoiceList"
+                  value={{invoice.invoiceId}}>
+            {{invoice.invoiceNo}}
+          </option>
+        </select>
+      </div>
+      <!--<span class="text-danger" *ngIf="customerName.invalid && formDir.submitted">
+      CustomerName is required
+    </span>-->
+    </div>
+
+    <div class="form-group row">
+      <label class="control-label col-md-12" for="Payment Date">Payment Date</label>
+      <div class="col-md-4">
+        <input class="form-control" type="date" [ngModel]="paymentDate | date:'yyyy-MM-dd'" (ngModelChange)="paymentDate = $event" formControlName="paymentDate">
+      </div>
+      <!--<span class="text-danger" *ngIf="customerName.invalid && formDir.submitted">
+      CustomerName is required
+    </span>-->
+    </div>
+
+    <div class="form-group row">
+      <label class="control-label col-md-12" for="Payment Amount">Payment Amount</label>
+      <div class="col-md-4">
+        <input class="form-control" type="text" formControlName="paymentAmount">
+      </div>
+      <!--<span class="text-danger" *ngIf="customerName.invalid && formDir.submitted">
+      CustomerName is required
+    </span>-->
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-light">Save</button>
+      &nbsp;
+      <button class="btn btn-light" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+
+
+</body>
+</html>

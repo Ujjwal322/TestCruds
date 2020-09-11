@@ -29,6 +29,14 @@ namespace TestCruds.Models
             }
         }
 
+        public List<CustomerTbl> GetCustomers()
+        {
+            List<CustomerTbl> lstcustomer = new List<CustomerTbl>();
+            lstcustomer = (from CustomerList in db.CustomerTbl select CustomerList).ToList();
+
+            return lstcustomer;
+        }
+
         public int AddCustomer(CustomerTbl cust)
         {
             try

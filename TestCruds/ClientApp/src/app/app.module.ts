@@ -19,9 +19,12 @@ import { PaymentService } from './services/paymentservice';
 import { FetchPaymentComponent } from './fetchpayment/fetchpayment.component';
 import { FetchDetailsComPonent } from './fetchdetalis/fetchdetails.component';
 import { FetchReportComponent } from './fetch-report/fetch-report.component';
+import { createinvoice } from './addinvoice/addinvoice.component';
+import { createpayment } from './addpayment/addpayment.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { DataTableModule } from "angular-6-datatable";
 //import { DataTablesModule } from 'angular-datatables';
-//import { TableModule } from 'primeng/table';
+import { TableModule } from 'primeng/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +34,8 @@ import { FetchReportComponent } from './fetch-report/fetch-report.component';
     FetchDataComponent,
     FetchCustomerComponent,
     createcustomer,
+    createinvoice,
+    createpayment,
     FetchInvoiceComponent,
     FetchPaymentComponent,
     FetchDetailsComPonent,
@@ -41,10 +46,11 @@ import { FetchReportComponent } from './fetch-report/fetch-report.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     HttpModule,
     //DataTableModule,
    //DataTablesModule,
-    //TableModule,
+    TableModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
@@ -56,6 +62,10 @@ import { FetchReportComponent } from './fetch-report/fetch-report.component';
       { path: 'fetch-report', component: FetchReportComponent },
       { path: 'register-employee', component: createcustomer },
       { path: 'customer/edit/:id', component: createcustomer },
+      { path: 'register-invoice', component: createinvoice },
+      { path: 'invoice/edit/:id', component: createinvoice },
+      { path: 'register-payment', component: createpayment },
+      { path: 'payment/edit/:id', component: createpayment },
       { path: '**', redirectTo: 'home' },
     ])
   ],

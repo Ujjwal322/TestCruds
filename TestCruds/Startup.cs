@@ -32,7 +32,7 @@ namespace TestCruds
                 configuration.RootPath = "ClientApp/dist";
             });
             //services.AddControllers();
-            services.AddDbContext<TestDetailContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<TestDetailContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IGetReportData, Getreportdata>();
         }
 
