@@ -37,35 +37,86 @@ namespace TestCruds.Models
             return lstcustomer;
         }
 
-        public int AddCustomer(CustomerTbl cust)
+        public int AddCustomer(CustomerTbl cust,string Customername)
         {
+            int returnVal = 0;
             try
             {
-                db.CustomerTbl.Add(cust);
-                db.SaveChanges();
-                return 1;
+                Customername = cust.CustomerName;
+
+                //CustomerTbl existingCustomer = db.CustomerTbl.Where(ct => ct.CustomerName == ct.CustomerName).FirstOrDefault();
+
+                bool existingCustomer = db.CustomerTbl.Any(x => x.CustomerName == Customername);
+                if(existingCustomer == true)
+                {
+                    returnVal = -1;
+                }
+                if(existingCustomer == false)
+                {
+                    db.CustomerTbl.Add(cust);
+                    db.SaveChanges();
+                }
+                
+                //return 1;
             }
             catch (Exception ex)
             {
-
-                throw;
+                Console.WriteLine(ex.Message);
+                //throw;
             }
+
+            return returnVal;
         }
 
-        public int UpdateCustomer(CustomerTbl cust)
+        public int UpdateCustomer(CustomerTbl cust, int Customerid, string Customername)
         {
+            int returnVal = 0;
+
+           
             try
             {
-                db.Entry(cust).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(cust).State = EntityState.Modified;
+                //db.SaveChanges();
 
-                return 1;
+                //return 1;
+
+                Customerid = cust.CustomerId;
+                Customername = cust.CustomerName;
+
+                cust = db.CustomerTbl.FirstOrDefault(x => x.CustomerId == Customerid);
+
+                if (cust != null)
+                {
+                    cust.CustomerId = Customerid;
+                    cust.CustomerName = Customername;
+                    db.CustomerTbl.Update(cust);
+                    Customerid = cust.CustomerId;
+                    Customername = cust.CustomerName;
+                }
+
+                bool existingCustomer = db.CustomerTbl.Any(x => x.CustomerName == Customername);
+                bool existingCustomer1 = db.CustomerTbl.Any(x => (x.CustomerId == Customerid) && (x.CustomerName == Customername));
+
+                if (existingCustomer1 == true)
+                {
+                    returnVal = db.SaveChanges();
+                }
+                else if (existingCustomer == true)
+                {
+                    returnVal = -1;
+                }
+                else
+                {
+                    returnVal = db.SaveChanges();
+                }
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Console.WriteLine(ex.Message);
+                //throw;
             }
+            return returnVal;
         }
 
         public CustomerTbl GetCustomer(int id)

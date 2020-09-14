@@ -25,6 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { DataTableModule } from "angular-6-datatable";
 //import { DataTablesModule } from 'angular-datatables';
 import { TableModule } from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
+import { ToastyModule } from 'ng2-toasty';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +53,8 @@ import { TableModule } from 'primeng/table';
     //DataTableModule,
    //DataTablesModule,
     TableModule,
+    PaginatorModule,
+    ToastyModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },

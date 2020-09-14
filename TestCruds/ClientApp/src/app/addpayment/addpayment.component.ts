@@ -19,6 +19,8 @@ export class createpayment implements OnInit {
   paymentAmount: string;
   errorMessage: any;
   invoiceList: Array<any> = [];
+  submitted = false;
+
   constructor(private _fb: FormBuilder, private _avRoute: ActivatedRoute, private paymentservice: PaymentService,
     private router: Router) {
 
@@ -53,7 +55,10 @@ export class createpayment implements OnInit {
     }
   }
 
+  get f() { return this.paymentForm.controls; }
+
   save() {
+    this.submitted = true;
     if (!this.paymentForm.valid) {
       return;
     }

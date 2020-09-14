@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
@@ -14,9 +14,15 @@
       <input type="hidden" name="invoiceId" value="invoiceId" formControlName="invoiceId" />
     </div>
     <div class="form-group row">
-      <label class=" control-label col-md-12">Invoice No</label>
+      <label class=" control-label col-md-12">
+        Invoice No
+        <span class="formFieldRequired">*</span>
+      </label>
       <div class="col-md-4">
-        <input class="form-control" type="text" formControlName="invoiceNo">
+        <input class="form-control" type="text" formControlName="invoiceNo" [ngClass]="{ 'is-invalid': submitted && f.invoiceNo.errors }">
+        <div *ngIf="submitted && f.invoiceNo.errors" class="invalid-feedback">
+          <div *ngIf="f.invoiceNo.errors.required"> Invoice No is required</div>
+        </div>
       </div>
       <!--<span class="text-danger" *ngIf="customerNo.invalid && formDir.submitted">
       CustomerNo is required.
@@ -60,9 +66,15 @@
     </div>
 
     <div class="form-group row">
-      <label class="control-label col-md-12" for="Invoice Amount">Invoice Amount</label>
+      <label class="control-label col-md-12" for="Invoice Amount">
+        Invoice Amount
+        <span class="formFieldRequired">*</span>
+      </label>
       <div class="col-md-4">
-        <input class="form-control" type="text" formControlName="invoiceAmount">
+        <input class="form-control" type="text" formControlName="invoiceAmount" [ngClass]="{ 'is-invalid': submitted && f.invoiceAmount.errors }">
+        <div *ngIf="submitted && f.invoiceAmount.errors" class="invalid-feedback">
+          <div *ngIf="f.invoiceAmount.errors.required">Invoice Amount is required</div>
+        </div>
       </div>
       <!--<span class="text-danger" *ngIf="customerName.invalid && formDir.submitted">
       CustomerName is required
@@ -81,7 +93,7 @@
 
 
     <div class="form-group">
-      <button type="submit" class="btn btn-light">Save</button>
+      <button type="submit" class="btn btn-light" [disabled]="loading">Save</button>
       &nbsp;
       <button class="btn btn-light" (click)="cancel()">Cancel</button>
     </div>

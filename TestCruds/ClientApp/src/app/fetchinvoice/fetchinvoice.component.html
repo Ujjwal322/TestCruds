@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  <p-table #dt class="dataTable" [value]="invList" [rows]="60" [paginator]="custList?.length > 60" [globalFilterFields]="['customerId']" [totalRecords]="100">
+  <p-table #dt class="dataTable" [value]="invList" [rows]="10" [paginator]="invList?.length > 5" [globalFilterFields]="['customerId']" [totalRecords]="100">
     <ng-template pTemplate="header">
       <tr>
         <th [pSortableColumn]="'invoiceId'">Invoice ID<p-sortIcon [field]="'invoiceId'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon></th>
@@ -68,7 +68,7 @@
         <th [pSortableColumn]="'invoiceDate'">Invoice Date<p-sortIcon [field]="'invoiceDate'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon></th>
         <th [pSortableColumn]="'invoiceAmount'">Invoice Amount<p-sortIcon [field]="'invoiceAmount'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon></th>
         <th [pSortableColumn]="'paymentDueDate'">Payment Due Date<p-sortIcon [field]="'paymentDueDate'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon></th>
-        <th [pSortableColumn]="''">Actions<p-sortIcon [field]="''" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon></th>
+        <th [pSortableColumn]="''">Actions</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-invList>

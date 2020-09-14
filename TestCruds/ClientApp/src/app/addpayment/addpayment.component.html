@@ -14,9 +14,15 @@
       <input type="hidden" name="paymentId" value="paymentId" formControlName="paymentId" />
     </div>
     <div class="form-group row">
-      <label class=" control-label col-md-12">Payment No</label>
+      <label class=" control-label col-md-12">
+        Payment No
+        <span class="formFieldRequired">*</span>
+      </label>
       <div class="col-md-4">
-        <input class="form-control" type="text" formControlName="paymentNo">
+        <input class="form-control" type="text" formControlName="paymentNo" [ngClass]="{ 'is-invalid': submitted && f.paymentNo.errors }">
+        <div *ngIf="submitted && f.paymentNo.errors" class="invalid-feedback">
+          <div *ngIf="f.paymentNo.errors.required">Payment No is required</div>
+        </div>
       </div>
       <!--<span class="text-danger" *ngIf="customerNo.invalid && formDir.submitted">
       CustomerNo is required.
@@ -60,9 +66,15 @@
     </div>
 
     <div class="form-group row">
-      <label class="control-label col-md-12" for="Payment Amount">Payment Amount</label>
+      <label class="control-label col-md-12" for="Payment Amount">
+        Payment Amount
+        <span class="formFieldRequired">*</span>
+      </label>
       <div class="col-md-4">
-        <input class="form-control" type="text" formControlName="paymentAmount">
+        <input class="form-control" type="text" formControlName="paymentAmount" [ngClass]="{ 'is-invalid': submitted && f.paymentAmount.errors }">
+        <div *ngIf="submitted && f.paymentAmount.errors" class="invalid-feedback">
+          <div *ngIf="f.paymentAmount.errors.required">Payment Amount is required</div>
+        </div>
       </div>
       <!--<span class="text-danger" *ngIf="customerName.invalid && formDir.submitted">
       CustomerName is required
@@ -70,7 +82,7 @@
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-light">Save</button>
+      <button type="submit" class="btn btn-light" [disabled]="loading">Save</button>
       &nbsp;
       <button class="btn btn-light" (click)="cancel()">Cancel</button>
     </div>

@@ -14,6 +14,7 @@ export class createcustomer implements OnInit {
   title: string = "Create Customer";
   customerId: number;
   errorMessage: any;
+  submitted = false;
 
 
   constructor(private _fb: FormBuilder, private _avRoute: ActivatedRoute, private customerservice: CustomerService,
@@ -40,7 +41,9 @@ export class createcustomer implements OnInit {
     }
   }
 
+  get f() { return this.customerForm.controls; }
   save() {
+    this.submitted = true;
     if (!this.customerForm.valid) {
       return;
     }

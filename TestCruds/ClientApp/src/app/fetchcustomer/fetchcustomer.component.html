@@ -66,9 +66,8 @@
         <th [pSortableColumn]="'customerId'">Customer ID<p-sortIcon [field]="'customerId'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon></th>
         <th [pSortableColumn]="'customerNo'">CustomerNumber<p-sortIcon [field]="'customerNo '" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon></th>
         <th [pSortableColumn]="'customerName'">CustomerName<p-sortIcon [field]="'customerName '" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon></th>
-        <th [pSortableColumn]="''">Actions<p-sortIcon [field]="''" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon></th>
-      </tr>
-    </ng-template>
+        <th [pSortableColumn]="''">Actions</th>
+</ng-template>
     <ng-template pTemplate="body" let-custList>
       <tr>
         <td>{{ custList.customerId}}</td>

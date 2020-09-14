@@ -48,10 +48,31 @@ namespace TestCruds.Controllers
 
         [HttpPost]
         [Route("api/Customer/Create")]
-        public int Create([FromBody] CustomerTbl c)
+        public int Create([FromBody] CustomerTbl c, string CustomerName)
         {
-            return cust.AddCustomer(c);
+            return cust.AddCustomer(c,CustomerName);
         }
+
+        //public IActionResult Create([FromBody] CustomerTbl c)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    CustomerTbl existingCustomer = TestDetailContext.CustomerTbl.Where(a => a.CustomerName == a.CustomerName).FirstOrDefault();
+
+        //    if(existingCustomer != null)
+        //    {
+        //        ModelState.AddModelError("customerName", "This name aleady exists");
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    TestDetailContext.CustomerTbl.Add(c);
+        //    TestDetailContext.SaveChanges();
+
+        //    return Json(c);
+        //}
 
         [HttpGet]
         [Route("api/Customer/Details/{id}")]
@@ -62,9 +83,9 @@ namespace TestCruds.Controllers
 
         [HttpPut]
         [Route("api/Customer/Edit")]
-        public int Edit([FromBody]CustomerTbl c)
+        public int Edit([FromBody]CustomerTbl c, int Customerid, string Customername)
         {
-            return cust.UpdateCustomer(c);
+            return cust.UpdateCustomer(c, Customerid, Customername);
         }
 
         [HttpDelete]

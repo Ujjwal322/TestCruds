@@ -19,6 +19,8 @@ export class createinvoice implements OnInit {
   paymentDueDate: Date;
   errorMessage: any;
   customerList: Array<any> = [];
+  submitted = false;
+
   //invoiceDate = new Date();
   constructor(private _fb: FormBuilder, private _avRoute: ActivatedRoute, private invoiceservice: InvoiceService,
     private router: Router) {
@@ -58,7 +60,12 @@ export class createinvoice implements OnInit {
     }
   }
 
+  get f() { return this.invoiceForm.controls; }
+
   save() {
+
+    this.submitted = true;
+
     if (!this.invoiceForm.valid) {
       return;
     }

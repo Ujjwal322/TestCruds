@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -14,27 +14,44 @@
       <input type="hidden" name="customerId" value="customerId" formControlName="customerId" />
     </div>
     <div class="form-group row">
-      <label class=" control-label col-md-12">Customer No</label>
+      <label class=" control-label col-md-12">
+        Customer No
+        <span class="formFieldRequired">*</span>
+      </label>
+
       <div class="col-md-4">
-        <input class="form-control" type="text" formControlName="customerNo">
+        <input class="form-control" type="text" formControlName="customerNo" [ngClass]="{ 'is-invalid': submitted && f.customerNo.errors }">
+        <div *ngIf="submitted && f.customerNo.errors" class="invalid-feedback">
+          <div *ngIf="f.customerNo.errors.required">Customer No is required</div>
+        </div>
       </div>
-      <!--<span class="text-danger" *ngIf="customerNo.invalid && formDir.submitted">
-        CustomerNo is required.
-      </span>-->
+     
+      <!--<div class="alert" *ngIf="!customerForm.controls['customerNo'].valid && customerForm.controls['customerNo'].touched">Required</div>-->
+      <!--<span class="text-danger" *ngIf="customerNo.invalid && customerForm.submitted">
+    CustomerNo is required.
+  </span>-->
     </div>
 
     <div class="form-group row">
-      <label class="control-label col-md-12" for="Department">Customer Name</label>
+      <label class="control-label col-md-12" for="Department">
+        Customer Name
+        <span class="formFieldRequired">*</span>
+      </label>
       <div class="col-md-4">
-        <input class="form-control" type="text" formControlName="customerName">
+        <input class="form-control" type="text" formControlName="customerName" [ngClass]="{ 'is-invalid': submitted && f.customerName.errors }">
+        <div *ngIf="submitted && f.customerName.errors" class="invalid-feedback">
+          <div *ngIf="f.customerName.errors.required">Customer Name is required</div>
+        </div>
       </div>
+      
+      <!--<div class="alert" *ngIf="!customerForm.controls['customerName'].valid && customerForm.controls['customerName'].touched">Required</div>-->
       <!--<span class="text-danger" *ngIf="customerName.invalid && formDir.submitted">
-        CustomerName is required
-      </span>-->
+    CustomerName is required
+  </span>-->
     </div>
     
     <div class="form-group">
-      <button type="submit" class="btn btn-light">Save</button>
+      <button type="submit" class="btn btn-light" [disabled]="loading">Save</button>
       &nbsp;
       <button class="btn btn-light" (click)="cancel()">Cancel</button>
     </div>
