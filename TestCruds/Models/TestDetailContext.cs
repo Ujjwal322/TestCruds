@@ -15,16 +15,21 @@ namespace TestCruds.Models
         {
         }
 
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<CustomerTbl> CustomerTbl { get; set; }
         public virtual DbSet<InvoiceTbl> InvoiceTbl { get; set; }
+        public virtual DbSet<LoginTbl> LoginTbl { get; set; }
         public virtual DbSet<PaymentTbl> PaymentTbl { get; set; }
-        //public  DbSet<Invoice> Invoices { get; set; }
+        public virtual DbSet<Registration> Registration { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=10.61.18.12;Initial Catalog=TestDetail;Persist Security Info=True;User ID=msdba;Password=dba@123");
             }
         }
@@ -32,6 +37,69 @@ namespace TestCruds.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
+
+            modelBuilder.Entity<AspNetRoles>(entity =>
+            {
+                entity.HasIndex(e => e.Name)
+                    .HasName("RoleNameIndex")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(128)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<AspNetUserClaims>(entity =>
+            {
+                entity.HasIndex(e => e.UserId)
+                    .HasName("IX_UserId");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserClaims)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId");
+            });
+
+            modelBuilder.Entity<AspNetUserLogins>(entity =>
+            {
+                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey, e.UserId })
+                    .HasName("PK_dbo.AspNetUserLogins");
+
+                entity.HasIndex(e => e.UserId)
+                    .HasName("IX_UserId");
+
+                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+
+                entity.Property(e => e.ProviderKey).HasMaxLength(128);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserLogins)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId");
+            });
+
+            modelBuilder.Entity<AspNetUsers>(entity =>
+            {
+                entity.HasIndex(e => e.UserName)
+                    .HasName("UserNameIndex")
+                    .IsUnique();
+
+                entity.Property(e => e.Email).HasMaxLength(256);
+
+                entity.Property(e => e.FullName).HasMaxLength(50);
+
+                entity.Property(e => e.LockoutEndDateUtc).HasColumnType("datetime");
+
+                entity.Property(e => e.Token)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserName).HasMaxLength(256);
+            });
 
             modelBuilder.Entity<CustomerTbl>(entity =>
             {
@@ -67,11 +135,19 @@ namespace TestCruds.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.PaymentDueDate).HasColumnType("date");
+            });
 
-                entity.HasOne(d => d.Customer)
-                    .WithMany(p => p.InvoiceTbl)
-                    .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK_InvoiceTbl_InvoiceTbl");
+            modelBuilder.Entity<LoginTbl>(entity =>
+            {
+                entity.HasKey(e => e.UserId);
+
+                entity.Property(e => e.PasswordHash)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<PaymentTbl>(entity =>
@@ -96,6 +172,19 @@ namespace TestCruds.Models
                     .WithMany(p => p.PaymentTbl)
                     .HasForeignKey(d => d.InvoiceId)
                     .HasConstraintName("FK_PaymentTbl_InvoiceTbl");
+            });
+
+            modelBuilder.Entity<Registration>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Email).HasMaxLength(50);
+
+                entity.Property(e => e.FullName).HasMaxLength(50);
+
+                entity.Property(e => e.Password).HasMaxLength(50);
+
+                entity.Property(e => e.UserName).HasMaxLength(50);
             });
         }
     }
