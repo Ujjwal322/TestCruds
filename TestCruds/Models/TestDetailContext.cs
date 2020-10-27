@@ -15,9 +15,11 @@ namespace TestCruds.Models
         {
         }
 
+        public  DbSet<Login> Login { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<CustomerTbl> CustomerTbl { get; set; }
         public virtual DbSet<InvoiceTbl> InvoiceTbl { get; set; }
@@ -29,7 +31,7 @@ namespace TestCruds.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=10.61.18.12;Initial Catalog=TestDetail;Persist Security Info=True;User ID=msdba;Password=dba@123");
             }
         }
@@ -80,6 +82,30 @@ namespace TestCruds.Models
                     .WithMany(p => p.AspNetUserLogins)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId");
+            });
+
+            modelBuilder.Entity<AspNetUserRoles>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.RoleId })
+                    .HasName("PK_dbo.AspNetUserRoles");
+
+                entity.HasIndex(e => e.RoleId)
+                    .HasName("IX_RoleId");
+
+                entity.HasIndex(e => e.UserId)
+                    .HasName("IX_UserId");
+
+                entity.Property(e => e.RoleId).HasMaxLength(128);
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.AspNetUserRoles)
+                    .HasForeignKey(d => d.RoleId)
+                    .HasConstraintName("FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserRoles)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId");
             });
 
             modelBuilder.Entity<AspNetUsers>(entity =>

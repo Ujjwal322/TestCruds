@@ -27,6 +27,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 import { ToastyModule } from 'ng2-toasty';
+import { UserComponent } from './user/user.component';
+import { RegistrationComponent } from './user/registration/registration.component';
+import { UserserviceService } from './services/userservice.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +44,9 @@ import { ToastyModule } from 'ng2-toasty';
     FetchInvoiceComponent,
     FetchPaymentComponent,
     FetchDetailsComPonent,
-    FetchReportComponent
+    FetchReportComponent,
+    UserComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -70,10 +75,20 @@ import { ToastyModule } from 'ng2-toasty';
       { path: 'invoice/edit/:id', component: createinvoice },
       { path: 'register-payment', component: createpayment },
       { path: 'payment/edit/:id', component: createpayment },
-      { path: '**', redirectTo: 'home' },
+      //{ path: '**', redirectTo: 'home' },
+
+      { path: 'dashboard', redirectTo: '/user/registration', pathMatch: 'full' },
+      {
+        path: 'user', component: UserComponent,
+        children: [
+          { path: 'registration', component: RegistrationComponent },
+          //{ path: 'login', component: LoginComponent }
+        ]
+      },
+      { path: 'home', component: HomeComponent}
     ])
   ],
-  providers: [CustomerService,InvoiceService,PaymentService],
+  providers: [CustomerService,InvoiceService,PaymentService,UserserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
